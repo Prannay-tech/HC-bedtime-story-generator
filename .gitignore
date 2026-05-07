@@ -2,3 +2,8 @@ __pycache__/
 *.pyc
 .env
 test_results.json
+test_all.json
+test25.json
+full_stories.json
+full_stories_v2.json
+eval_stories.json
