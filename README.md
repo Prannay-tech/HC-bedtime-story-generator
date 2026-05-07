@@ -160,7 +160,6 @@ which reflects realistic quality variation rather than uniform inflation.
 ├── utils.py          — call_model() with retry, StoryConfig, JSON parsing
 ├── observability.py  — LangSmith tracing helpers (optional)
 ├── run_test_all.py   — Batch test runner (30 prompts)
-├── test_all.json     — Latest batch test results
 └── requirements.txt
 ```
 
