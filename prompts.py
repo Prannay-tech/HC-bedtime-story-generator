@@ -73,28 +73,150 @@ GENRE_STYLE_NOTES = {
 
 FEW_SHOT_EXAMPLES = """\
 
-REFERENCE EXAMPLES — study these for vocabulary level, sentence rhythm, and descriptive style:
+REFERENCE EXAMPLES — four complete stories showing the range of what great children's writing looks like.
+Study each one for vocabulary, sentence rhythm, how the character arrives somewhere new, and how the
+moral is shown through action rather than stated.
 
-Example 1 (Hans Christian Andersen — The Brave Tin Soldier):
-"There were once five-and-twenty tin soldiers, who were all brothers, for they had been made \
-out of the same old tin spoon. They held their muskets tight, and looked straight before them. \
-Their uniforms were red and blue — very smart indeed. The first thing they heard in this world, \
-when the lid was taken off the box, was a little boy clapping his hands and crying, 'Soldiers!'"
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EXAMPLE 1 — Adventure with real friction (original)
+Prompt: A story about a girl who has to cross a scary bridge to bring medicine to her grandma.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Maya held the small bottle tight. Grandma was sick, and the doctor's shop was on the other side
+of the bridge.
 
-Example 2 (Beatrix Potter style):
-"Once upon a time there were four little rabbits, and their names were Flopsy, Mopsy, \
-Cottontail, and Peter. They lived with their mother in a sand-bank, underneath the root \
-of a very big fir tree. 'Now, my dears,' said old Mrs. Rabbit one morning, 'you may go \
-into the fields or down the lane, but don't go into Mr. McGregor's garden.'"
+Maya hated that bridge. It swayed in the wind. The boards creaked. And below, the river was dark
+and fast.
 
-What makes these work for ages 5-10:
-- Short sentences (6-10 words average)
-- Concrete nouns and active verbs
-- Dialogue that reveals character immediately
-- One clear, simple image per sentence
-- Warmth and gentle humor throughout
+She stood at the start of it and looked across. It felt very far.
 
-Write your story with this same rhythm and vocabulary.\
+"I can't," she said out loud.
+
+Nobody answered. There was only the wind.
+
+She put one foot on the first board. It groaned. She stopped. Her heart was loud in her ears.
+
+Then she thought of Grandma, waiting. She took a breath, looked straight ahead — not down — and
+walked. One step. Two. The bridge swayed. She gripped the rope rail so hard her knuckles went white.
+
+Halfway across, a gust hit. Maya froze. The river roared below.
+
+"Don't look down," she told herself. She didn't.
+
+She walked the rest of the way without stopping.
+
+When she knocked on the doctor's door, her legs were still shaking. But she was smiling too.
+
+That evening, she sat with Grandma while Grandma drank the medicine and patted Maya's hand.
+"You're a brave one," Grandma said.
+
+Maya shook her head. "I was scared the whole time."
+
+Grandma smiled. "That's what brave is."
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EXAMPLE 2 — Emotional / mood story, no conflict needed (original)
+Prompt: A story about a boy who misses his dad who works far away.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Every Friday, Leo drew a picture and put it in an envelope.
+
+He drew their dog, Biscuit. He drew the oak tree they climbed last summer. He drew the two of
+them fishing, even though they had never caught anything — just sat there with their feet in the
+water, which Leo liked better anyway.
+
+Mom mailed the envelope on Saturday. Dad was working on an oil rig, far out at sea. Letters took
+nine days to get there.
+
+One Tuesday, a thick envelope arrived for Leo. Inside were nine drawings — one for every day
+Dad had been gone since the last letter. A drawing of seagulls. A drawing of the sunrise over
+the water. A drawing of a fish that Dad said almost bit his boot.
+
+And at the bottom, one that was just a boy and his dad sitting by a river, feet in the water,
+no fish at all.
+
+Leo put it on his wall, right next to his bed.
+
+That night he drew a new picture to send back. Just the two of them, same river, same way.
+He added a fish this time, jumping out of the water. He figured Dad would laugh.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EXAMPLE 3 — Humor with escalating absurdity (original)
+Prompt: A story about a dog who is convinced the vacuum cleaner is trying to eat the house.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Biscuit the dog had a theory.
+
+The vacuum cleaner was eating the house. Slowly. One crumb at a time.
+
+He had watched it for weeks. Every time the machine came out, things went INTO it and never
+came back. A sock. A pom-pom. Half of his favourite biscuit that he had been saving.
+
+Gone. All gone.
+
+Biscuit decided to stop it.
+
+He sat in front of the vacuum and barked. The vacuum kept coming. He barked louder. The vacuum
+was not scared of barking, which Biscuit found very suspicious.
+
+He tried running away and barking from the other room. The vacuum followed him. This was worse.
+
+He hid behind the sofa. The vacuum stopped. Biscuit waited. After a while, he heard a click.
+The vacuum went quiet. He peeked out.
+
+It was just sitting there. Not moving. Not eating anything.
+
+Biscuit crept closer. He sniffed it. It smelled of dust and carpet and nothing scary at all.
+
+He sat down next to it, not sure what to think.
+
+Mom walked in and laughed. "Making friends, Biscuit?"
+
+Biscuit looked at the vacuum. The vacuum said nothing. It was very bad at conversation.
+
+But it also had not eaten anything in the last five minutes, so perhaps, Biscuit thought,
+the treaty was working.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EXAMPLE 4 — Moral shown through action, Aesop style (adapted from Aesop's "The Lion and the Mouse")
+Prompt: A story that teaches that even small friends can matter.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+A lion was sleeping under a big tree when a small mouse ran right across his nose.
+
+The lion woke up and grabbed the mouse in his paw.
+
+"Please don't eat me," said the mouse. "I'm too small to be a good meal. Let me go and one day
+I'll help you."
+
+The lion laughed. "You? Help me?" He laughed so hard his sides shook. But he was in a good
+mood from his nap, so he opened his paw and let the mouse go.
+
+The mouse ran fast and did not look back.
+
+Two weeks later, the lion walked into a hunter's net and could not get free. He roared and
+pulled and twisted, but the ropes were thick and the knots were tight.
+
+Then he heard a small voice. "Hold still."
+
+It was the mouse. She got to work with her sharp teeth — snip, snip, snip — until one rope
+broke, then another. In ten minutes, the lion walked out of the net and shook himself off.
+
+He looked down at the mouse for a long moment.
+
+"You were right," he said.
+
+"I usually am," said the mouse, and disappeared into the grass.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+WHAT MAKES THESE WORK:
+- Sentences are short (6-12 words). One image per sentence.
+- Dialogue is specific to the character — the mouse says "I usually am." Not "Thank you."
+- The moral is never stated. In Example 1, Grandma defines bravery through dialogue.
+  In Example 4, the lion says two words and the story is done.
+- The character arrives somewhere different: Maya is still scared but smiling. Leo sends
+  a drawing with a fish he added. Biscuit declares a treaty. The lion says three words.
+- Humor comes from specificity: "He was very bad at conversation." Not "it was funny."
+- Emotional stories move without conflict: Leo never breaks down — he just draws and waits.
+  The arrival is the drawing on the wall, the new letter with the jumping fish.
+
+Write with this same rhythm, specificity, and restraint.\
 """
 
 STORYTELLER_SYSTEM_BASE = """\
@@ -102,14 +224,19 @@ You are a world-class children's storyteller. Your stories are published in majo
 magazines and adored by kids aged 5-10 and their parents alike.
 
 CRAFT PRINCIPLES (these make the difference between forgettable and beloved):
-- Every story needs FRICTION. The protagonist must want something and face a real obstacle
-  before succeeding. Easy wins are boring. A lonely penguin who is instantly welcomed has no story.
-  The character must try, fail or struggle, then find a way through.
+- The ending must feel different from the beginning. The character should arrive somewhere
+  they weren't at the start — through effort, discovery, or an emotional shift. A story where
+  nothing changes is not a story. This does NOT mean every story needs a conflict or obstacle:
+  a girl missing her grandpa can find peace through a letter. A grandma can share a magical
+  secret that changes how her granddaughter sees her. The journey can be internal or emotional.
+  But something must move. Ask: what does the character understand, feel, or have at the end
+  that they didn't have at the start?
 - SHOW the moral through what characters DO, not what they SAY. Never end with
   "The moral of the story is..." or "They learned that..." — if you need to tell the reader
-  the lesson, the story didn't earn it. Let the final action or image carry the meaning.
+  the lesson, the story didn't earn it. Let the final action, image, or line of dialogue carry it.
 - Specific beats a child will remember: a funny mistake, a moment of real fear, a surprise
-  discovery, a gesture of kindness that costs something. Avoid generic warm feelings.
+  discovery, a letter hidden in a photo album, a gesture of kindness. Avoid generic warm feelings
+  like "hearts full of gratitude" or "a warmth she had never known" — these are filler.
 - Dialogue reveals character. "I can't do it," she said is weaker than "My wings are too small,"
   she said, staring at the ground. Give characters a distinct voice, not a placeholder line.
 
@@ -229,10 +356,11 @@ def storyteller_user(plan: dict, min_words: int = 300) -> str:
         f"Write the full story now.\n\n"
         f"SELF-CHECK BEFORE OUTPUTTING (do not show this process — output only the final story):\n"
         f"1. Count your words. Must be {min_words}-500. If under, expand a scene. If over 500, cut.\n"
-        f"2. Does the protagonist face real friction — a setback, a failure, a moment of doubt —\n"
-        f"   before succeeding? If they succeed too easily, add an obstacle.\n"
-        f"3. Does the ending show the moral through action, not state it as a lesson?\n"
-        f"   If your last paragraph contains 'the moral is' or 'they learned that', rewrite it.\n"
+        f"2. Does the ending feel different from the beginning? What does the character\n"
+        f"   understand, feel, or have now that they didn't at the start? If nothing changed,\n"
+        f"   rewrite the ending so the arrival is clear — through an action, image, or line.\n"
+        f"3. Does the ending show the meaning, not state it? If your last paragraph contains\n"
+        f"   'the moral is', 'they learned that', or 'and so', rewrite it as a moment, not a lesson.\n"
         f"4. Replace any word with 3+ syllables: 'enormous'→'huge', 'immediately'→'right away'.\n"
         f"Only output the final story."
     )
