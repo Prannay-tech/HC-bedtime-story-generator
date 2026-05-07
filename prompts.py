@@ -325,11 +325,17 @@ JUDGE_MIN_SCORES = {
 def judge_user(story: str, plan: dict) -> str:
     word_count = len(story.split())
     fk = round(__import__('textstat').flesch_kincaid_grade(story), 1)
+    fk_note = (
+        f"FK grade {fk} — within normal range for ages 5-10."
+        if fk <= 8.0 else
+        f"FK grade {fk} — ELEVATED (target ≤8.0 for ages 5-10). "
+        f"Scrutinize vocabulary_accessibility carefully: look for long or adult words "
+        f"a 7-year-old would not know and penalize accordingly."
+    )
     return (
         f"Intended moral: {plan.get('moral', 'not specified')}\n"
         f"Target age: {plan.get('estimated_age_target', 7)}\n"
         f"Word count: {word_count} (target: 300-500 words)\n"
-        f"Flesch-Kincaid grade: {fk} (informational only — use vocabulary_accessibility "
-        f"to judge actual child vocabulary difficulty, not this number)\n\n"
+        f"Flesch-Kincaid reading level: {fk_note}\n\n"
         f"Story to evaluate:\n---\n{story}\n---"
     )
