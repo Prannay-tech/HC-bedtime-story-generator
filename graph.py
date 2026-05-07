@@ -34,152 +34,95 @@ _narrative = NarrativeRefinePass()
 _judge = JudgeAgent()
 
 
-# ── Node functions ────────────────────────────────────────────────────────────
-# Each function receives the full state and returns ONLY the keys it changes.
-
-def classify_node(state: StoryState) -> dict:
-    """Classify the request into genre, tone, themes, and target age."""
-    cfg = state["config"]
-    result = _classifier.run(state["request"], cfg)
-    return {
-        "classification": result,
-        "total_calls": 1,
-    }
-
-
-def plan_node(state: StoryState) -> dict:
-    """Build a structured 5-beat story plan from the request and classification."""
-    cfg = state["config"]
-    plan = _planner.run(state["request"], state["classification"], cfg)
-    plan["estimated_age_target"] = state["classification"].get("estimated_age_target", 7)
-    return {
-        "plan": plan,
-        "total_calls": 1,
-    }
-
-
-def draft_node(state: StoryState) -> dict:
-    """Write the initial story draft. Self-check for word count and vocab is in the prompt."""
-    cfg = state["config"]
-    genre = state["classification"].get("genre", "adventure")
-    story = _storyteller.run(state["plan"], genre, cfg)
-    return {
-        "story": story,
-        "total_calls": 1,
-        "iteration_count": 0,
-    }
-
-
-def expand_node(state: StoryState) -> dict:
-    """Expand the story if it is below the minimum word count."""
-    cfg = state["config"]
-    story = _expand.run(state["story"], cfg)
-    return {
-        "story": story,
-        "total_calls": 1,
-    }
-
-
-def judge_node(state: StoryState) -> dict:
-    """Score the story on all 5 quality dimensions and check each against its minimum."""
-    cfg = state["config"]
-    evaluation = _judge.run(state["story"], state["plan"], cfg)
-    word_count = len(state["story"].split())
-
-    iteration_entry = {
-        "iteration": state.get("iteration_count", 0) + 1,
-        "story": state["story"],
-        "evaluation": evaluation,
-        "word_count": word_count,
-    }
-
-    return {
-        "evaluation": evaluation,
-        "iteration_count": state.get("iteration_count", 0) + 1,
-        "iterations": [iteration_entry],
-        "total_calls": 1,
-    }
-
-
-def refine_node(state: StoryState) -> dict:
-    """Refine the story based on judge critique and failing dimension gates."""
-    cfg = state["config"]
-    evaluation = state["evaluation"]
-    word_count = len(state["story"].split())
-
-    # Build targeted fix list — failing dimensions first, then judge's own fixes
-    fixes = []
-    for dim, score in evaluation.get("dimension_failures", {}).items():
-        fixes.append(
-            f"FAILING CHECK '{dim}' (score {score:.1f}, minimum {JUDGE_MIN_SCORES[dim]:.0f}): fix this first."
-        )
-    if word_count < cfg.min_words:
-        fixes.append(
-            f"Story is only {word_count} words. Expand to at least {cfg.min_words} words."
-        )
-    fixes.extend(evaluation.get("specific_fixes", []))
-
-    story = _narrative.run(state["story"], evaluation.get("critique", ""), fixes, cfg)
-    return {
-        "story": story,
-        "total_calls": 1,
-    }
-
-
-def finalize_node(state: StoryState) -> dict:
-    """Mark the story as final. Terminal node before END."""
-    return {"final_story": state["story"]}
-
-
-# ── Routing functions (conditional edges) ─────────────────────────────────────
-
-def route_after_draft(state: StoryState) -> str:
-    """After drafting: expand if too short, otherwise go straight to judge."""
-    if len(state["story"].split()) < state["config"].min_words:
-        return "expand"
-    return "judge"
-
-
-def route_after_judge(state: StoryState) -> str:
-    """
-    After judging: finalize if all gates pass, refine if we have iterations left,
-    or finalize anyway if we've hit the max.
-    """
-    cfg = state["config"]
-    evaluation = state["evaluation"]
-    word_count = len(state["story"].split())
-
-    overall_ok = evaluation.get("overall", 0) >= cfg.judge_threshold
-    dims_ok = evaluation.get("all_dimensions_pass", False)
-    length_ok = word_count >= cfg.min_words
-
-    if overall_ok and dims_ok and length_ok:
-        logger.info("All quality gates passed. Finalizing.")
-        return "finalize"
-
-    if state.get("iteration_count", 0) >= cfg.max_iterations:
-        logger.info("Max iterations reached. Finalizing with best available story.")
-        return "finalize"
-
-    return "refine"
-
-
-def route_after_refine(state: StoryState) -> str:
-    """After refining: expand if the refine pass shortened the story, otherwise re-judge."""
-    if len(state["story"].split()) < state["config"].min_words:
-        return "expand"
-    return "judge"
-
-
 # ── Graph assembly ─────────────────────────────────────────────────────────────
 
-def build_graph(config: StoryConfig) -> StateGraph:
-    """
-    Assemble and compile the LangGraph story pipeline.
+def _make_nodes(cfg: StoryConfig):
+    """Return node functions closed over cfg — keeps config out of StoryState."""
 
-    The config is injected into state at invocation time so nodes can access it
-    without it being a global — making the graph reusable with different configs.
-    """
+    def classify_node(state: StoryState) -> dict:
+        result = _classifier.run(state["request"], cfg)
+        return {"classification": result, "total_calls": 1}
+
+    def plan_node(state: StoryState) -> dict:
+        plan = _planner.run(state["request"], state["classification"], cfg)
+        plan["estimated_age_target"] = state["classification"].get("estimated_age_target", 7)
+        return {"plan": plan, "total_calls": 1}
+
+    def draft_node(state: StoryState) -> dict:
+        genre = state["classification"].get("genre", "adventure")
+        story = _storyteller.run(state["plan"], genre, cfg)
+        return {"story": story, "total_calls": 1, "iteration_count": 0}
+
+    def expand_node(state: StoryState) -> dict:
+        story = _expand.run(state["story"], cfg)
+        return {"story": story, "total_calls": 1}
+
+    def judge_node(state: StoryState) -> dict:
+        evaluation = _judge.run(state["story"], state["plan"], cfg)
+        word_count = len(state["story"].split())
+        iteration_entry = {
+            "iteration": state.get("iteration_count", 0) + 1,
+            "story": state["story"],
+            "evaluation": evaluation,
+            "word_count": word_count,
+        }
+        return {
+            "evaluation": evaluation,
+            "iteration_count": state.get("iteration_count", 0) + 1,
+            "iterations": [iteration_entry],
+            "total_calls": 1,
+        }
+
+    def refine_node(state: StoryState) -> dict:
+        evaluation = state["evaluation"]
+        word_count = len(state["story"].split())
+        fixes = []
+        for dim, score in evaluation.get("dimension_failures", {}).items():
+            fixes.append(
+                f"FAILING CHECK '{dim}' (score {score:.1f}, minimum {JUDGE_MIN_SCORES[dim]:.0f}): fix this first."
+            )
+        if word_count < cfg.min_words:
+            fixes.append(f"Story is only {word_count} words. Expand to at least {cfg.min_words} words.")
+        fixes.extend(evaluation.get("specific_fixes", []))
+        story = _narrative.run(state["story"], evaluation.get("critique", ""), fixes, cfg)
+        return {"story": story, "total_calls": 1}
+
+    def finalize_node(state: StoryState) -> dict:
+        return {"final_story": state["story"]}
+
+    return classify_node, plan_node, draft_node, expand_node, judge_node, refine_node, finalize_node
+
+
+def build_graph(config: StoryConfig) -> StateGraph:
+    """Assemble and compile the LangGraph story pipeline."""
+    classify_node, plan_node, draft_node, expand_node, judge_node, refine_node, finalize_node = (
+        _make_nodes(config)
+    )
+
+    # Routing closures also need config
+    min_words = config.min_words
+    judge_threshold = config.judge_threshold
+    max_iterations = config.max_iterations
+
+    def route_after_draft(state: StoryState) -> str:
+        return "expand" if len(state["story"].split()) < min_words else "judge"
+
+    def route_after_judge(state: StoryState) -> str:
+        evaluation = state["evaluation"]
+        overall_ok = evaluation.get("overall", 0) >= judge_threshold
+        dims_ok = evaluation.get("all_dimensions_pass", False)
+        length_ok = len(state["story"].split()) >= min_words
+        if overall_ok and dims_ok and length_ok:
+            logger.info("All quality gates passed. Finalizing.")
+            return "finalize"
+        if state.get("iteration_count", 0) >= max_iterations:
+            logger.info("Max iterations reached. Finalizing with best available story.")
+            return "finalize"
+        return "refine"
+
+    def route_after_refine(state: StoryState) -> str:
+        return "expand" if len(state["story"].split()) < min_words else "judge"
+
     graph = StateGraph(StoryState)
 
     # Register nodes
@@ -228,7 +171,6 @@ def run_pipeline(request: str, config: StoryConfig) -> StoryState:
 
     initial_state: StoryState = {
         "request": request,
-        "config": config,
         "classification": {},
         "plan": {},
         "story": "",

@@ -5,7 +5,7 @@ import logging
 from dataclasses import dataclass, field
 from typing import Any
 
-import openai
+from openai import OpenAI, RateLimitError, OpenAIError
 
 logging.basicConfig(
     level=logging.INFO,
@@ -51,9 +51,11 @@ def call_model(
     max_tokens: int | None = None,
     json_mode: bool = False,
 ) -> str:
-    openai.api_key = os.getenv("OPENAI_API_KEY")
-    if not openai.api_key:
+    api_key = os.getenv("OPENAI_API_KEY")
+    if not api_key:
         raise EnvironmentError("OPENAI_API_KEY environment variable not set.")
+
+    client = OpenAI(api_key=api_key)
 
     kwargs: dict[str, Any] = {
         "model": config.model,
@@ -66,15 +68,15 @@ def call_model(
 
     for attempt in range(1, config.retry_attempts + 1):
         try:
-            resp = openai.ChatCompletion.create(**kwargs)
-            return resp.choices[0].message["content"].strip()
-        except openai.error.RateLimitError:
+            resp = client.chat.completions.create(**kwargs)
+            return resp.choices[0].message.content.strip()
+        except RateLimitError:
             if attempt == config.retry_attempts:
                 raise
             delay = config.retry_base_delay ** attempt
             logger.warning("Rate limited. Retrying in %.1fs (attempt %d/%d).", delay, attempt, config.retry_attempts)
             time.sleep(delay)
-        except openai.error.OpenAIError as e:
+        except OpenAIError as e:
             logger.error("OpenAI API error: %s", e)
             raise
 
