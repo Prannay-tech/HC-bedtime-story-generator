@@ -2,7 +2,7 @@ import os
 import json
 import time
 import logging
-from dataclasses import dataclass, field
+from dataclasses import dataclass
 from typing import Any
 
 from openai import OpenAI, RateLimitError, OpenAIError
@@ -13,6 +13,19 @@ logging.basicConfig(
     datefmt="%H:%M:%S",
 )
 logger = logging.getLogger("story_pipeline")
+
+# Module-level client — avoids re-creating the HTTP connection pool on every call.
+# Initialised lazily on first use so missing keys raise at call time, not import time.
+_client: OpenAI | None = None
+
+def _get_client() -> OpenAI:
+    global _client
+    if _client is None:
+        api_key = os.getenv("OPENAI_API_KEY")
+        if not api_key:
+            raise EnvironmentError("OPENAI_API_KEY environment variable not set.")
+        _client = OpenAI(api_key=api_key)
+    return _client
 
 
 @dataclass
@@ -34,15 +47,6 @@ class StoryConfig:
     retry_base_delay: float = 1.5
 
 
-@dataclass
-class PipelineTrace:
-    user_request: str = ""
-    classification: dict = field(default_factory=dict)
-    plan: dict = field(default_factory=dict)
-    iterations: list = field(default_factory=list)
-    final_story: str = ""
-    total_calls: int = 0
-
 
 def call_model(
     messages: list[dict],
@@ -51,11 +55,7 @@ def call_model(
     max_tokens: int | None = None,
     json_mode: bool = False,
 ) -> str:
-    api_key = os.getenv("OPENAI_API_KEY")
-    if not api_key:
-        raise EnvironmentError("OPENAI_API_KEY environment variable not set.")
-
-    client = OpenAI(api_key=api_key)
+    client = _get_client()
 
     kwargs: dict[str, Any] = {
         "model": config.model,

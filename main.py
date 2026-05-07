@@ -139,7 +139,7 @@ def main() -> None:
     print(f"\n{('  ' + title).center(WIDTH)}")
     print()
 
-    print_story(state["final_story"])
+    print_story(state["final_story"] or state["story"])
     print_scorecard(state)
     ask_for_feedback(state["final_story"], state, config)
 

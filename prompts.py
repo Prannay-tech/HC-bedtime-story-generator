@@ -73,7 +73,7 @@ GENRE_STYLE_NOTES = {
 
 FEW_SHOT_EXAMPLES = """\
 
-REFERENCE EXAMPLES — four complete stories showing the range of what great children's writing looks like.
+REFERENCE EXAMPLES — five complete stories showing the range of what great children's writing looks like.
 Study each one for vocabulary, sentence rhythm, how the character arrives somewhere new, and how the
 moral is shown through action rather than stated.
 
@@ -205,16 +205,59 @@ He looked down at the mouse for a long moment.
 "I usually am," said the mouse, and disappeared into the grass.
 
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+EXAMPLE 5 — Animal story with real resistance before belonging
+Prompt: A story about a small turtle who wants to join the other pond animals.
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+Pip was the slowest thing in the pond.
+
+He watched the ducks zip across the water. He watched the frogs leap from lily pad to lily pad.
+He watched the dragonflies do loops in the air.
+
+"Can I play?" he asked the ducks one morning.
+
+"We're racing," said the ducks. "You'd lose."
+
+He asked the frogs. "We're jumping," said the frogs. "You can't jump."
+
+He asked the dragonflies. They didn't even stop.
+
+Pip sat on his rock. The sun was warm. The pond was loud with everyone else's fun.
+
+Then, one afternoon, a duckling swam too fast, missed a turn, and got stuck in the reeds.
+She called out, but the reeds muffled her voice. Nobody heard.
+
+Nobody except Pip.
+
+He wasn't fast. He wasn't loud. But he was already near the reeds, and he pushed through them
+slowly, steadily, until he reached her and guided her out.
+
+The duckling shook her feathers. "How did you get in here?"
+
+"I'm slow," said Pip. "I notice things."
+
+That evening, the ducks made room for him on the big flat rock at the edge of the water.
+It wasn't racing or jumping. It was just sitting together, watching the sunset turn the pond pink.
+
+Pip thought that was probably the best game of all.
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 WHAT MAKES THESE WORK:
 - Sentences are short (6-12 words). One image per sentence.
 - Dialogue is specific to the character — the mouse says "I usually am." Not "Thank you."
-- The moral is never stated. In Example 1, Grandma defines bravery through dialogue.
-  In Example 4, the lion says two words and the story is done.
+- None of these stories end with a summary paragraph. Example 1 ends on Grandma's line
+  "That's what brave is." — not "And so Maya understood that bravery means acting despite fear."
+  Example 3 ends on "perhaps the treaty was working." — not "Biscuit learned that things that
+  seem scary are often just misunderstood." Example 4 ends on "I usually am." — two words,
+  story done. The moment IS the lesson. If your final paragraph explains what just happened,
+  delete it and end on the line before it.
 - The character arrives somewhere different: Maya is still scared but smiling. Leo sends
   a drawing with a fish he added. Biscuit declares a treaty. The lion says three words.
 - Humor comes from specificity: "He was very bad at conversation." Not "it was funny."
 - Emotional stories move without conflict: Leo never breaks down — he just draws and waits.
   The arrival is the drawing on the wall, the new letter with the jumping fish.
+- Animal stories need real resistance before belonging: in Example 5, Pip is rejected twice
+  before he earns his place — through his own specific quality (slowness = noticing), not
+  because everyone suddenly decides to be nice. The belonging feels earned.
 
 Write with this same rhythm, specificity, and restraint.\
 """
@@ -231,9 +274,12 @@ CRAFT PRINCIPLES (these make the difference between forgettable and beloved):
   secret that changes how her granddaughter sees her. The journey can be internal or emotional.
   But something must move. Ask: what does the character understand, feel, or have at the end
   that they didn't have at the start?
-- SHOW the moral through what characters DO, not what they SAY. Never end with
-  "The moral of the story is..." or "They learned that..." — if you need to tell the reader
-  the lesson, the story didn't earn it. Let the final action, image, or line of dialogue carry it.
+- SHOW the moral through what characters DO, not what they SAY. The most common mistake
+  in children's stories is the summary paragraph: a final paragraph that steps back and explains
+  what just happened ("And so Tommy learned that saying sorry takes courage." / "From that day on,
+  she understood that true friendship means..."). This is the story talking to itself. Delete it.
+  End one paragraph earlier, on the moment. If that moment needs a summary to land, the moment
+  wasn't good enough — fix the moment, don't add the summary.
 - Specific beats a child will remember: a funny mistake, a moment of real fear, a surprise
   discovery, a letter hidden in a photo album, a gesture of kindness. Avoid generic warm feelings
   like "hearts full of gratitude" or "a warmth she had never known" — these are filler.
@@ -251,18 +297,7 @@ TECHNICAL RULES:
 - Paragraph breaks every 3-5 sentences.\
 """ + FEW_SHOT_EXAMPLES
 
-SIMPLIFICATION_OVERRIDE = """
 
-CRITICAL OVERRIDE — READING LEVEL TOO HIGH:
-The previous draft failed the Flesch-Kincaid readability check. You MUST rewrite using simpler language.
-Rules to follow strictly:
-- Every sentence must be 10 words or fewer. Break long sentences into two.
-- Replace every word with 3+ syllables with a simpler alternative.
-- Remove all subordinate clauses ("which", "although", "however", "therefore").
-- Use active voice only. No passive constructions.
-- Prefer dialogue over description — kids understand speech better than narration.
-This is a hard requirement. The story must read at grade 4 or below.\
-"""
 
 def storyteller_system(genre: str) -> str:
     style = GENRE_STYLE_NOTES.get(genre, "")
@@ -359,8 +394,10 @@ def storyteller_user(plan: dict, min_words: int = 300) -> str:
         f"2. Does the ending feel different from the beginning? What does the character\n"
         f"   understand, feel, or have now that they didn't at the start? If nothing changed,\n"
         f"   rewrite the ending so the arrival is clear — through an action, image, or line.\n"
-        f"3. Does the ending show the meaning, not state it? If your last paragraph contains\n"
-        f"   'the moral is', 'they learned that', or 'and so', rewrite it as a moment, not a lesson.\n"
+        f"3. Read your last paragraph. Does it step back and explain what just happened —\n"
+        f"   'And so [character] learned that...', 'From that day on, [character] understood...',\n"
+        f"   'True friendship means...', 'She realized that...'? If yes: DELETE that paragraph.\n"
+        f"   End on the paragraph before it. The moment speaks for itself.\n"
         f"4. Replace any word with 3+ syllables: 'enormous'→'huge', 'immediately'→'right away'.\n"
         f"Only output the final story."
     )
