@@ -4,3 +4,4 @@ langchain-openai>=0.3.0
 langsmith>=0.1.0
 textstat==0.7.3
 tenacity==8.2.3
+streamlit>=1.35.0

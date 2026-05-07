@@ -14,8 +14,19 @@ pip install -r requirements.txt
 
 # 2. Set your API key
 export OPENAI_API_KEY=your-key-here
+```
 
-# 3. Run
+### Option A — Web app (recommended)
+
+```bash
+streamlit run app.py
+```
+
+Opens in your browser at `http://localhost:8501`. Enter a story prompt, click **Generate Story**, and the pipeline runs in the background. The story, quality scorecard, and metadata are displayed when ready. You can download the story as a `.txt` file.
+
+### Option B — Terminal
+
+```bash
 python main.py
 ```
 
@@ -152,7 +163,8 @@ which reflects realistic quality variation rather than uniform inflation.
 ## Project Structure
 
 ```
-├── main.py           — Entry point, display, user feedback loop
+├── app.py            — Streamlit web interface (streamlit run app.py)
+├── main.py           — CLI entry point, display, user feedback loop
 ├── graph.py          — LangGraph StateGraph, routing logic, run_pipeline()
 ├── agents.py         — All agent classes: Classifier, Planner, Storyteller, Judge, Refiner
 ├── prompts.py        — All prompts organized by agent, genre style notes, few-shot examples
