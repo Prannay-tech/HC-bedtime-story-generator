@@ -2,6 +2,6 @@ openai>=1.0.0
 langgraph>=1.1.9
 langchain-openai>=0.3.0
 langsmith>=0.1.0
-textstat==0.7.3
+textstat>=0.7.4
 tenacity==8.2.3
 streamlit>=1.35.0
