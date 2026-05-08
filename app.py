@@ -26,21 +26,27 @@ st.markdown("""
 
   /* ── Base ── */
   .stApp {
-    background: linear-gradient(160deg, #0f0c29 0%, #1a1060 50%, #24243e 100%);
-    color: #f0e6d3;
+    background: linear-gradient(160deg, #12111f 0%, #1c1b35 55%, #1a1a2e 100%);
+    color: #ddd5f0;
     min-height: 100vh;
   }
 
+  /* ── Hide "Press Command to apply" helper text on textarea ── */
+  .stTextArea [data-baseweb="textarea"] + div,
+  .stTextArea ~ small,
+  small[data-testid="stWidgetLabel"] { display: none !important; }
+  [data-testid="InputInstructions"] { display: none !important; }
+
   /* ── Stars background ── */
   .stApp::before {
-    content: "★ ✦ ✧ ★ ✦ · ✧ ★ · ✦ ✧ · ★ ✦";
+    content: "· ✧ · ★ · ✦ · ✧ · ★ · ✦ · ✧ · ★ ·";
     position: fixed;
     top: 8px;
     left: 0; right: 0;
     text-align: center;
-    font-size: 0.75rem;
-    color: rgba(255,255,255,0.15);
-    letter-spacing: 1.8rem;
+    font-size: 0.7rem;
+    color: rgba(255,255,255,0.1);
+    letter-spacing: 1.4rem;
     pointer-events: none;
     z-index: 0;
   }
@@ -48,18 +54,18 @@ st.markdown("""
   /* ── Title ── */
   .hero-title {
     font-family: 'Fredoka One', cursive, Georgia, serif;
-    font-size: 3.2rem;
-    color: #ffe066;
+    font-size: 3rem;
+    color: #c4b5e8;
     text-align: center;
-    text-shadow: 0 0 24px rgba(255,220,80,0.4), 0 2px 8px rgba(0,0,0,0.6);
+    text-shadow: 0 0 30px rgba(160,130,220,0.3), 0 2px 8px rgba(0,0,0,0.5);
     margin-bottom: 0.1rem;
     line-height: 1.15;
   }
 
   .hero-sub {
     font-family: 'Nunito', sans-serif;
-    font-size: 1.05rem;
-    color: #b8a9e0;
+    font-size: 1rem;
+    color: #8a7fb0;
     text-align: center;
     margin-bottom: 1.5rem;
   }
@@ -67,63 +73,65 @@ st.markdown("""
   /* ── Moon deco ── */
   .moon-deco {
     text-align: center;
-    font-size: 4rem;
+    font-size: 3.6rem;
     line-height: 1;
-    margin-bottom: 0.5rem;
-    filter: drop-shadow(0 0 18px rgba(255,220,80,0.5));
+    margin-bottom: 0.4rem;
+    filter: drop-shadow(0 0 16px rgba(180,160,255,0.35));
   }
 
   /* ── Input area ── */
   .stTextArea label {
     font-family: 'Nunito', sans-serif !important;
-    font-size: 1.1rem !important;
+    font-size: 1.05rem !important;
     font-weight: 700 !important;
-    color: #ffe066 !important;
+    color: #b8aad6 !important;
   }
   .stTextArea textarea {
-    background: rgba(255,255,255,0.06) !important;
-    color: #f0e6d3 !important;
-    border: 2px solid rgba(160,120,255,0.4) !important;
+    background: rgba(255,255,255,0.04) !important;
+    color: #ddd5f0 !important;
+    border: 1.5px solid rgba(140,110,200,0.3) !important;
     border-radius: 16px !important;
     font-family: 'Nunito', sans-serif !important;
     font-size: 1rem !important;
+    caret-color: #c4b5e8;
   }
   .stTextArea textarea:focus {
-    border-color: #ffe066 !important;
-    box-shadow: 0 0 12px rgba(255,220,80,0.25) !important;
+    border-color: rgba(180,150,240,0.55) !important;
+    box-shadow: 0 0 10px rgba(160,130,220,0.15) !important;
   }
+  .stTextArea textarea::placeholder { color: rgba(180,160,220,0.35) !important; }
 
   /* ── Generate button ── */
   .stButton > button {
-    background: linear-gradient(135deg, #f7971e, #ffd200) !important;
-    color: #1a1035 !important;
+    background: linear-gradient(135deg, #5b4a8a, #7c6aad) !important;
+    color: #ede8ff !important;
     font-family: 'Fredoka One', cursive !important;
-    font-size: 1.25rem !important;
-    font-weight: 700 !important;
-    border: none !important;
+    font-size: 1.2rem !important;
+    border: 1px solid rgba(180,150,255,0.25) !important;
     border-radius: 50px !important;
     padding: 0.65rem 2.5rem !important;
-    box-shadow: 0 4px 20px rgba(255,210,0,0.35) !important;
+    box-shadow: 0 4px 18px rgba(90,70,150,0.4) !important;
     transition: transform 0.15s ease, box-shadow 0.15s ease !important;
     width: 100% !important;
   }
   .stButton > button:hover {
     transform: translateY(-2px) !important;
-    box-shadow: 0 8px 28px rgba(255,210,0,0.5) !important;
+    box-shadow: 0 8px 24px rgba(100,80,170,0.5) !important;
+    background: linear-gradient(135deg, #6a5799, #8d7bbf) !important;
   }
 
   /* ── Story card ── */
   .story-card {
-    background: linear-gradient(145deg, rgba(42,25,90,0.95), rgba(30,18,70,0.95));
-    border: 1.5px solid rgba(160,120,255,0.3);
+    background: linear-gradient(150deg, rgba(28,22,52,0.97), rgba(20,16,40,0.97));
+    border: 1px solid rgba(140,110,200,0.2);
     border-radius: 24px;
     padding: 2.2rem 2.8rem;
     font-family: 'Nunito', Georgia, serif;
-    font-size: 1.12rem;
+    font-size: 1.08rem;
     line-height: 2;
-    color: #f0e6d3;
+    color: #ddd5f0;
     white-space: pre-wrap;
-    box-shadow: 0 8px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05);
+    box-shadow: 0 8px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.03);
     position: relative;
   }
 
@@ -131,105 +139,99 @@ st.markdown("""
     content: "✦";
     position: absolute;
     top: 14px; left: 20px;
-    color: rgba(255,220,80,0.3);
-    font-size: 1.2rem;
+    color: rgba(180,160,255,0.18);
+    font-size: 1.1rem;
   }
   .story-card::after {
     content: "✦";
     position: absolute;
     bottom: 14px; right: 20px;
-    color: rgba(255,220,80,0.3);
-    font-size: 1.2rem;
+    color: rgba(180,160,255,0.18);
+    font-size: 1.1rem;
   }
 
   .story-title {
     font-family: 'Fredoka One', cursive, Georgia, serif;
-    font-size: 1.7rem;
-    color: #ffe066;
+    font-size: 1.6rem;
+    color: #c4b5e8;
     text-align: center;
     margin-bottom: 1.4rem;
-    text-shadow: 0 0 12px rgba(255,220,80,0.3);
+    text-shadow: 0 0 10px rgba(160,130,220,0.25);
   }
 
   /* ── Badge row ── */
   .badge-row {
     display: flex;
-    gap: 10px;
+    gap: 8px;
     flex-wrap: wrap;
     justify-content: center;
     margin: 1.2rem 0;
   }
   .badge {
-    background: rgba(255,255,255,0.08);
-    border: 1px solid rgba(160,120,255,0.35);
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(140,110,200,0.25);
     border-radius: 20px;
-    padding: 5px 14px;
+    padding: 4px 13px;
     font-family: 'Nunito', sans-serif;
-    font-size: 0.85rem;
-    color: #d4bfff;
+    font-size: 0.82rem;
+    color: #a89cc8;
   }
 
-  /* ── Expander (scorecard + critique) ── */
+  /* ── Expander ── */
   .stExpander {
-    background: rgba(255,255,255,0.04) !important;
-    border: 1px solid rgba(160,120,255,0.25) !important;
+    background: rgba(255,255,255,0.03) !important;
+    border: 1px solid rgba(140,110,200,0.2) !important;
     border-radius: 16px !important;
   }
   .stExpander summary {
     font-family: 'Nunito', sans-serif !important;
     font-weight: 700 !important;
-    color: #d4bfff !important;
-    font-size: 1rem !important;
+    color: #a89cc8 !important;
+    font-size: 0.95rem !important;
   }
 
   /* ── Progress bars ── */
   .stProgress > div > div {
-    background: linear-gradient(90deg, #a855f7, #6366f1) !important;
+    background: linear-gradient(90deg, #6b52a8, #8b72c8) !important;
     border-radius: 8px !important;
   }
   .stProgress > div {
-    background: rgba(255,255,255,0.08) !important;
+    background: rgba(255,255,255,0.06) !important;
     border-radius: 8px !important;
   }
 
   /* ── Download button ── */
   .stDownloadButton > button {
-    background: rgba(255,255,255,0.07) !important;
-    color: #d4bfff !important;
-    border: 1.5px solid rgba(160,120,255,0.4) !important;
+    background: rgba(255,255,255,0.04) !important;
+    color: #a89cc8 !important;
+    border: 1px solid rgba(140,110,200,0.3) !important;
     border-radius: 50px !important;
     font-family: 'Nunito', sans-serif !important;
-    font-size: 0.9rem !important;
+    font-size: 0.88rem !important;
     font-weight: 600 !important;
     width: 100% !important;
   }
 
   /* ── Divider ── */
-  hr { border-color: rgba(160,120,255,0.2) !important; margin: 1.5rem 0 !important; }
+  hr { border-color: rgba(140,110,200,0.15) !important; margin: 1.4rem 0 !important; }
 
-  /* ── Overall score pill ── */
+  /* ── Score pill ── */
   .score-pill {
     display: inline-block;
     font-family: 'Fredoka One', cursive;
-    font-size: 1.5rem;
+    font-size: 1.4rem;
     padding: 6px 24px;
     border-radius: 40px;
     margin-bottom: 1rem;
   }
   .score-label-text {
     font-family: 'Nunito', sans-serif;
-    font-size: 0.88rem;
-    color: #b8a9e0;
+    font-size: 0.86rem;
+    color: #8a7fb0;
     margin-bottom: 2px;
   }
 
-  /* ── Spinner text ── */
-  .stSpinner > div {
-    color: #ffe066 !important;
-    font-family: 'Nunito', sans-serif !important;
-  }
-
-  /* ── Warning ── */
+  /* ── Alert ── */
   .stAlert {
     border-radius: 14px !important;
     font-family: 'Nunito', sans-serif !important;
@@ -242,7 +244,7 @@ st.markdown("""
 st.markdown("<div class='moon-deco'>🌙</div>", unsafe_allow_html=True)
 st.markdown("<div class='hero-title'>Bedtime Story Generator</div>", unsafe_allow_html=True)
 st.markdown(
-    "<div class='hero-sub'>✨ Tell us what kind of story you'd like, and we'll write one just for you! ✨</div>",
+    "<div class='hero-sub'>Tell us what kind of story you'd like, and we'll write one just for you.</div>",
     unsafe_allow_html=True,
 )
 st.markdown("---")
@@ -265,7 +267,7 @@ if generate:
     if not prompt.strip():
         st.warning("Oops! Please tell us what kind of story you'd like first 😊")
     else:
-        with st.spinner("🌠 Crafting your story… sit tight, this takes about 30 seconds!"):
+        with st.spinner("Crafting your story… sit tight, this takes about 30 seconds."):
             cfg = StoryConfig()
             try:
                 state = run_pipeline(prompt.strip(), cfg)
@@ -372,7 +374,7 @@ if generate:
                 )
 
         st.markdown(
-            "<p style='text-align:center;color:#6b5fa0;font-size:0.85rem;"
-            "font-family:Nunito,sans-serif;margin-top:1.5rem;'>Sweet dreams! 🌙⭐</p>",
+            "<p style='text-align:center;color:#4e4570;font-size:0.82rem;"
+            "font-family:Nunito,sans-serif;margin-top:1.5rem;'>Sweet dreams 🌙</p>",
             unsafe_allow_html=True,
         )
